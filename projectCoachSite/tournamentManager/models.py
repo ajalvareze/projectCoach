@@ -4,6 +4,9 @@ from django.db import models
 class Team(models.Model):
     id = models.PositiveIntegerField(primary_key=True)
     name = models.CharField('nombre', max_length=200)
+    
+    def __str__(self):
+        return self.name
 
 class Match(models.Model):
     id = models.PositiveIntegerField(primary_key=True)
@@ -14,8 +17,15 @@ class Match(models.Model):
     result1 = models.PositiveIntegerField()
     result2 = models.PositiveIntegerField()      
     
+    def __str__(self):
+        return str(self.date) + " " + self.location + " " + " " + self.team1.name + " vs " + self.team2.name
+
+    
 class Tournament(models.Model):
     id = models.PositiveIntegerField(primary_key=True)
     name = models.CharField('nombre', max_length=200)
     DFB = models.CharField(max_length=200) 
     matches = models.ManyToManyField(Match, blank=True)
+    
+    def __str__(self):
+        return self.name
